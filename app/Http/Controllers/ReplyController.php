@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Reply;
+use App\Thread;
 use Illuminate\Http\Request;
 
 class ReplyController extends Controller
 {
+    /**
+     * Create a new RepliesController instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -22,9 +29,14 @@ class ReplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Thread $thread)
     {
-        //
+        $thread->addReply([
+            'body' => request('body'),
+            'user_id' => auth()->id()
+        ]);
+
+        return back();
     }
 
     /**

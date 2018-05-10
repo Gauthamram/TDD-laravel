@@ -7,10 +7,11 @@
             <div class="card">
                 <div class="card-header">All Threads</div>
                 @foreach($threads as $thread)
-                <article>
-                    <h2><a href="/thread/{{$thread->id}}">{{ $thread->title }}</a></h2>
-                    <p>{{ $thread->body }} </p>
-                </article>
+                    <div class="card-body">
+                        <div class="card-title"><a href="/threads/{{ $thread->id}}">{{ $thread->title }}</a></div>
+                        <p class="card-text">{{ $thread->body }} </p>
+                    </div>
+                    <hr>
                 @endforeach
             </div>
         </div>
