@@ -24,5 +24,20 @@
             </div>
         </div>
     </div>
+    @if(auth()->id())
+    <div class="row justify-content-center mt-3" >
+        <div class="col-md-8">
+            <form method="POST" action="{{ $thread->path() . '/replies'}}">
+                {{ csrf_field() }}
+                <fieldset class="form-group">
+                   <textarea class="form-control" name="body" rows="8" placeholder="Say Something!!!"></textarea>
+                </fieldset>
+                <fieldset class="form-group">
+                     <button type="Submit" class="btn btn-primary">Reply</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    @endif
 </div>
 @endsection
