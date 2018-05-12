@@ -11,7 +11,7 @@ class ReplyTest extends TestCase
     /** @test */
     public function a_reply_has_an_author()
     {
-    	$reply = factory('App\Reply')->create();
+    	$reply = create('App\Reply');
 
         $this->assertInstanceOf('App\User', $reply->author);
     }
