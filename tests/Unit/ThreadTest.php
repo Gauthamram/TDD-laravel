@@ -25,10 +25,25 @@ class ThreadTest extends TestCase
     }
 
     /** @test */
+    public function a_thread_has_a_string_path()
+    {
+    	$thread = create('App\Thread');
+		$this->assertEquals(
+			"/threads/{$thread->channel->slug}/{$thread->id}", $thread->path()
+		);
+    }
+
+    /** @test */
     public function a_thread_has_an_author()
     {
 		$this->assertInstanceOf(
 			'App\User', $this->thread->author
 		);
+    }
+
+    /** @test */
+    public function a_thread_belongs_to_a_channel()
+    {
+    	$this->assertInstanceOf('App\Channel', $this->thread->channel);
     }
 }

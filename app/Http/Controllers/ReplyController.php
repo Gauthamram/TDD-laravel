@@ -29,7 +29,7 @@ class ReplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Thread $thread)
+    public function create($channel, Thread $thread)
     {
         $thread->addReply([
             'body' => request('body'),

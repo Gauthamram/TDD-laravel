@@ -11,7 +11,7 @@ class ParticipateInThreadsTest extends TestCase
 	public function unauthenticated_user_cannot_add_replies()
 	{
 		$this->withExceptionHandling()
-        	->post('/threads/1/replies', [])
+        	->post('/threads/something/1/replies', [])
         	->assertRedirect('/login');
 	}
 
@@ -28,5 +28,15 @@ class ParticipateInThreadsTest extends TestCase
 
 		$this->get($thread->path())
 			->assertSee($reply->body);
+	}
+
+	/** @test */
+	public function a_reply_must_have_a_body()
+	{
+		$this->withExceptionHandling()->actingAs(create('App\User'));
+
+        $thread = make('App\Reply',['body' => null]);
+        return $this->post('/threads', $thread->toArray())
+        	->assertSessionHasErrors('body');
 	}
 }
